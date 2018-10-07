@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>轮播图3D</title>
-	<style type="text/css">
+	<style type="text/css" id="ocss">
 		*{
 			padding:0;
 
@@ -171,18 +171,24 @@
 		var oLi = ol[0].getElementsByTagName("li");
 		var ul = document.getElementsByTagName("ul");
 		var uLi = ul[0].getElementsByTagName("li");
-		for(var i=0;i<oLi.length;i++){
-			console.log(1,oLi[i])
-			oLi[i].onclick=function(){	
-				console.log(1,oLi[i])
-				for(var j=0;j<uLi.length;j++){
-					// #banner:hover ul li{transform:translateZ(-180px) rotateX(-180deg);}
-					console.log(2,uLi[i])
 
-					uLi[j].style.transform = "translateZ(-180px) rotateX(-180deg)";
+		var ocss = document.querySelector("#ocss");
+
+		for(var i=0;i<oLi.length;i++){
+			var self = i;
+			(function(self){
+				oLi[self].onclick= function(){
+			 		console.log(uLi[self])
+			 
+					uLi[self].style.transform = "translateZ(-180px) rotateX(-180deg)";
 				}
-			}
+			})(i)
 		}
+
+
 	}
 </script>
 </html>
+
+<!-- i 0  j  0 1 2 3 
+i 1  j 0 1 2 3  -->
