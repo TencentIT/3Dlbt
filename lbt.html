@@ -175,12 +175,11 @@
 		var ocss = document.querySelector("#ocss");
 
 		for(var i=0;i<oLi.length;i++){
-			var self = i;
+			// var self = i;
 			(function(self){
 				oLi[self].onclick= function(){
-			 		console.log(uLi[self])
-			 
-					uLi[self].style.transform = "translateZ(-180px) rotateX(-180deg)";
+			 		console.log(self)
+			 		ocss.innerHTML += "#banner ul li{transform:translateZ(-180px) rotateX("+self*-90+"deg);}";
 				}
 			})(i)
 		}
@@ -189,6 +188,3 @@
 	}
 </script>
 </html>
-
-<!-- i 0  j  0 1 2 3 
-i 1  j 0 1 2 3  -->
