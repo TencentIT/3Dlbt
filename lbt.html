@@ -4,16 +4,17 @@
 	<meta charset="utf-8">
 	<title>轮播图3D</title>
 	<style type="text/css">
-	*{
-		padding:0;
+		*{
+			padding:0;
 
-	}
+		}
 		#banner{
 			width:808px;
 			height:360px;
 			background: pink;
 			margin:600px auto;
 			perspective:800px;
+			position: relative;
 		}
 		
 		#banner ul li{
@@ -96,6 +97,29 @@
 		#banner ul li:nth-child(3){transition:1s .4s;}
 		#banner ul li:nth-child(4){transition:1s .6s;}
 
+		/*小圆点*/
+		#banner ol{
+			width:120px;
+			/*height:;*/
+			position: absolute;
+			bottom:10px;
+			right:10px;		
+			list-style: none;
+		}
+		#banner ol li{
+			width:20px;
+			height:20px;
+			background: gray;
+			line-height: 20px;
+			float:left;
+			color:#fff;
+			border-radius: 50%;
+			margin :0 5px ;
+			text-align:center;
+		}
+		#banner ol li.on{
+			background: #f60;
+		}
 	</style>
 </head>
 <body>
@@ -129,6 +153,14 @@
 				<div></div>
 			</li>
 		</ul>
+
+		<!-- 小圆点 -->
+		<ol>
+			<li class="on">1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+		</ol>
 	</div>
 </body>
 </html>
