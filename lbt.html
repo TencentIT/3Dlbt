@@ -179,7 +179,10 @@
 			(function(self){
 				oLi[self].onclick= function(){
 			 		console.log(self)
+			 		// 方法1
 			 		ocss.innerHTML += "#banner ul li{transform:translateZ(-180px) rotateX("+self*-90+"deg);}";
+
+
 				}
 			})(i)
 		}
