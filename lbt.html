@@ -191,6 +191,13 @@
 			oLi[i].index = i;
 			oLi[i].onclick = function(){
 				ocss.innerHTML  += "#banner ul li{transform:translateZ(-180px) rotateX("+this.index*-90+"deg);}";
+				for(var j=0;j<oLi.length;j++){
+					//原生DOM操作 把数字的样式都清掉
+					oLi[j].className="";
+				}
+				//用第二种方法时候 注意 oli[]里面应该写this.index 因为此时外面的i已经变成4 了
+				// console.log(i)  4
+				oLi[this.index].className="on"
 			}
 		}
 
