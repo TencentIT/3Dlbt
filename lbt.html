@@ -12,7 +12,7 @@
 			width:800px;
 			height:360px;
 			background: pink;
-			margin:600px auto;
+			margin:100px auto;
 			perspective:800px;
 			position: relative;
 		}
@@ -205,31 +205,38 @@
 				oLi[this.index].className="on"
 			}
 		}
-
-		init(4)
+		//调用init
+		init(100)
 
 		function init(num){
 			//动态绑定
-			var uHtml  ="",pHtml="",tHtml="";	// 4
+			var uHtml  ="",pHtml="",tHtml="",zHtml="",z=0;	// 4
 			var liW = parseInt(bWidth/num);	//每个li的的宽度
-			console.log(5,bWidth);
-			console.log(4,liW);
-			for(var i=0;i<num;i++){
+			
+			for(var i=0;i<num;i++){	
+				if(i>num/2){	
+				//4个模块的时候 z-index:-1 当多个模块是 z-index:-Z -1也是一直在改变，如果都设置为-1  后面的模块都会堆叠在一块了
+				//#banner ul li:nth-child(4) div{z-indx:-1;}
+				z--;
+					zHtml+="#banner ul li:nth-child("+(i+1)+") {z-index:"+(z)+";}"
+				}
+				
+
 				uHtml +="<li><div></div><div></div><div></div><div></div></li>";
 				// #banner ul li:nth-child(1) div{background-position: 0px;}
 				pHtml+="#banner ul li:nth-child("+(i+1)+") div{background-position:"+(-i*liW)+"px;}"
 				// #banner ul li:nth-child(1){transition:1s 0s;}
 				tHtml+="#banner ul li:nth-child("+(i+1)+"){transition:1s "+(0.8*i/num)+"s;}"
 			}
-			console.log(1,uHtml)
-			console.log(2,pHtml)
-			console.log(3,tHtml)
+		 
 			ul[0].innerHTML = uHtml;
-			console.log(7,uHtml)
+			 
 			ocss.innerHTML += "#banner ul li,#banner ul li div{width:"+liW+"px ;} ";
 			ocss.innerHTML += pHtml;
 			ocss.innerHTML += tHtml;
-			console.log(6,ocss)
+			ocss.innerHTML += zHtml;
+
+			 
 		}
 
 
