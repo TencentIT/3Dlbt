@@ -19,7 +19,7 @@
 		
 		#banner ul li{
 			list-style: none;
-			width:200px;
+			/*width:200px;*/
 			height:360px;
 			/*border:1px solid green;*/
 			float:left;
@@ -28,7 +28,7 @@
 			transform:translateZ(-180px); 		/*让整个li后退180px*/
 		}
 		#banner ul li div{
-			width:200px;
+			/*width:200px;*/ 
 			height:360px;
 			/*border:1px solid red;*/
 			position: absolute;
@@ -86,16 +86,16 @@
 		}*/
 
 		/*设置定位 background-position  第一个li 图片都不动 改变第后面li的定位*/
-		#banner ul li:nth-child(1) div{background-position: 0;}
+		/*#banner ul li:nth-child(1) div{background-position: 0;}
 		#banner ul li:nth-child(2) div{background-position: -200px;}
 		#banner ul li:nth-child(3) div{background-position: -400px;}
-		#banner ul li:nth-child(4) div{background-position: -600px;}
+		#banner ul li:nth-child(4) div{background-position: -600px;}*/
 
 		/*增加动画延迟时间*/
-		#banner ul li:nth-child(1){transition:1s 0s;}
+		/*#banner ul li:nth-child(1){transition:1s 0s;}
 		#banner ul li:nth-child(2){transition:1s .2s;}
 		#banner ul li:nth-child(3){transition:1s .4s;}
-		#banner ul li:nth-child(4){transition:1s .6s;}
+		#banner ul li:nth-child(4){transition:1s .6s;}*/
 
 		/*小圆点*/
 		#banner ol{
@@ -127,14 +127,14 @@
 	<div id="banner">
 		<ul>
 			<!-- li里面的div顺序依次是 上 下 前 后 左右因为轮播图里面用不到可以删除掉-->
-			<li>
+		<!-- 	<li>
 				<div></div>
 				<div></div>
 				<div></div>
-				<div></div>
+				<div></div> -->
 				<!-- <div class="left">左</div>
 				<div class="right">右</div> -->
-			</li>
+			<!-- </li>
 			<li>
 				<div></div>
 				<div></div>
@@ -146,13 +146,14 @@
 				<div></div>
 				<div></div>
 				<div></div>
-			</li>
-			<li style="z-index: -1">
+			</li> -->
+
+			<!-- <li style="z-index: -1">
 				<div></div>
 				<div></div>
 				<div></div>
 				<div></div>
-			</li>
+			</li> -->
 		</ul>
 
 		<!-- 小圆点 -->
@@ -167,6 +168,7 @@
 
 <script type="text/javascript">
 	window.onload = function(){
+		
 		var ol = document.getElementsByTagName("ol");
 		var oLi = ol[0].getElementsByTagName("li");
 		var ul = document.getElementsByTagName("ul");
@@ -174,6 +176,9 @@
 
 		var ocss = document.querySelector("#ocss");
 
+		//通过offsetWidth属性获取到轮播图区域的宽度
+		var bWidth = document.getElementById("banner").offsetWidth;
+		// alert(bWidth)
 		for(var i=0;i<oLi.length;i++){
 			 
 			// 方法1 闭包方式
@@ -199,6 +204,32 @@
 				// console.log(i)  4
 				oLi[this.index].className="on"
 			}
+		}
+
+		init(4)
+
+		function init(num){
+			//动态绑定
+			var uHtml  ="",pHtml="",tHtml="";	// 4
+			var liW = parseInt(bWidth/num);	//每个li的的宽度
+			console.log(5,bWidth);
+			console.log(4,liW);
+			for(var i=0;i<num;i++){
+				uHtml +="<li><div></div><div></div><div></div><div></div></li>";
+				// #banner ul li:nth-child(1) div{background-position: 0px;}
+				pHtml+="#banner ul li:nth-child("+(i+1)+") div{background-position:"+(-i*liW)+"px;}"
+				// #banner ul li:nth-child(1){transition:1s 0s;}
+				tHtml+="#banner ul li:nth-child("+(i+1)+"){transition:1s "+(0.8*i/num)+"s;}"
+			}
+			console.log(1,uHtml)
+			console.log(2,pHtml)
+			console.log(3,tHtml)
+			ul[0].innerHTML = uHtml;
+			console.log(7,uHtml)
+			ocss.innerHTML += "#banner ul li,#banner ul li div{width:"+liW+"px ;} ";
+			ocss.innerHTML += pHtml;
+			ocss.innerHTML += tHtml;
+			console.log(6,ocss)
 		}
 
 
